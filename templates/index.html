@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol Art</title>
+</head>
+
+<body>
+
+    <h1>SYMBOL ART</h1>
+
+    <form action="/symbol-art" method="POST">
+
+        <label for="text">Text:</label>
+        <input
+            type="text"
+            id="text"
+            name="text"
+            placeholder="Enter text"
+        >
+
+        <h3>Banner</h3>
+
+        <label>
+            <input type="radio" name="banner" value="shadow">
+            Shadow
+        </label>
+
+        <label>
+            <input type="radio" name="banner" value="standard" checked>
+            Standard
+        </label>
+
+        <label>
+            <input type="radio" name="banner" value="thinkertoy">
+            Thinkertoy
+        </label>
+
+        <br><br>
+
+        <button type="submit">Generate</button>
+
+    </form>
+
+    <hr>
+
+    <h2>Result</h2>
+
+    <pre>{{.Result}}</pre>
+
+</body>
+</html>
