@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
+	"strings"
 )
 
 func symbolArtHandler(w http.ResponseWriter, r *http.Request) {
@@ -26,8 +28,40 @@ func symbolArtHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Bad Request", http.StatusBadRequest)
 		return
 	}
+	bannerName := banner + ".txt"
 
-	fmt.Fprint(w, text, banner)
+	lines, err := os.ReadFile(bannerName)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
+		return
+	}
+	content := string(lines)
+
+	bannerLines := strings.Split(content, "\n")
+
+	fmt.Println(bannerName)
+
+	result := generateArt(text, bannerLines)
+	fmt.Fprint(w, result)
+}
+
+func generateArt(word string, lines []string) string {
+	var builder strings.Builder
+
+	for row := 0; row < 8; row++ {
+		for _, symbol := range word {
+			index := int(symbol) - 32
+			start := index*9 + 1
+
+			builder.WriteString(lines[start+row])
+
+		}
+		builder.WriteString("\n")
+
+	}
+	result := builder.String()
+	return result
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -51,5 +85,8 @@ func main() {
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/symbol-art", symbolArtHandler)
 	fmt.Println("server zapushen на http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		fmt.Println("server upal", err)
+	}
 }
