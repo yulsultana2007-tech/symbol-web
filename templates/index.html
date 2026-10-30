@@ -3,51 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symbol Art</title>
+    <title>Symbol Web</title>
 </head>
-
 <body>
 
-    <h1>SYMBOL ART</h1>
+    <main class="container">
 
-    <form action="/symbol-art" method="POST">
+        <header class="header">
+            <h1>Symbol Web</h1>
+            <p>Create your own ASCII art</p>
+        </header>
 
-        <label for="text">Text:</label>
-        <input
-            type="text"
-            id="text"
-            name="text"
-            placeholder="Enter text"
-        >
+        <section class="generator">
 
-        <h3>Banner</h3>
+            <h2>ASCII Art Generator</h2>
 
-        <label>
-            <input type="radio" name="banner" value="shadow">
-            Shadow
-        </label>
+            <form action="/symbol-art" method="POST">
 
-        <label>
-            <input type="radio" name="banner" value="standard" checked>
-            Standard
-        </label>
+                <label for="text-input">Enter your text</label>
 
-        <label>
-            <input type="radio" name="banner" value="thinkertoy">
-            Thinkertoy
-        </label>
+                <input
+                    type="text"
+                    id="text-input"
+                    name="text"
+                    placeholder="Type something..."
+                    required
+                >
 
-        <br><br>
+                <h3>Choose Banner</h3>
 
-        <button type="submit">Generate</button>
+                <div class="banner-options">
 
-    </form>
+                    <label>
+                        <input type="radio" name="banner" value="standard" checked>
+                        Standard
+                    </label>
 
-    <hr>
+                    <label>
+                        <input type="radio" name="banner" value="shadow">
+                        Shadow
+                    </label>
 
-    <h2>Result</h2>
+                    <label>
+                        <input type="radio" name="banner" value="thinkertoy">
+                        Thinkertoy
+                    </label>
 
-    <pre>{{.Result}}</pre>
+                </div>
+
+                <button type="submit">Generate Art</button>
+
+            </form>
+
+        </section>
+
+        <section class="result-section">
+
+            <h2>Your Result</h2>
+
+            <div class="result-box">
+                <pre id="art-result"></pre>
+            </div>
+
+        </section>
+
+    </main>
 
 </body>
 </html>
